@@ -38,15 +38,6 @@ def add_context_file(collection: str, file: Annotated[bytes, File()], filetype: 
         return jsonable_encoder({'result', str(e)})
 
 
-def convert_file(file, filename, filetype):
-    with open(filename, "wb") as file1:
-        file1.write(file)
-    if filetype == '.docx':
-        text = docx2txt.process(filename)
-        with open(filename, "w") as file1:
-            file1.write(text)
-
-
 @app.get('/get-doc')
 def get_doc(collection: str, query: str, response: Response):
     try:
