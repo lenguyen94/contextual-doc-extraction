@@ -1,0 +1,24 @@
+version: '3.5'
+
+services:
+  chatbot-f:
+    build: /frontend
+    container_name: chatbot-f
+    image: chatbot-f
+    command: bash -c "python app.py"
+    ports:
+      - 80:7860
+
+  chatbot-b:
+    build: /backend
+    container_name: chatbot-b
+    image: chatbot-b
+    command: bash -c "uvicorn main:app --host 0.0.0.0 --port 8000 --log-level info"
+    ports:
+      - 8000:8000
+
+
+networks:
+  default:
+    name: chatbot
+    external: true
